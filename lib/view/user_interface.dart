@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'calcutator_button.dart';
 
@@ -25,15 +26,17 @@ class _UserInterfaceState extends State<UserInterface> {
               padding: const EdgeInsets.all(10),
               color: Colors.blueGrey.withOpacity(0.70),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    inputString,
-                    style: const TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 50),
+                  Text(inputString,
+                      style: const TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 50)),
+                  const Icon(
+                    Icons.backspace,
+                    size: 40,
                   )
                 ],
               ),
@@ -41,17 +44,15 @@ class _UserInterfaceState extends State<UserInterface> {
           ),
           Expanded(
             flex: 6,
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(children: [makeButton("AC,+/-,%,/")]),
-                  Row(children: [makeButton("7,8,8,X")]),
-                  Row(children: [makeButton("4,5,6,-")]),
-                  Row(children: [makeButton("1,2,3,+")]),
-                  Row(children: [makeButton("0,.,=")])
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                makeButton("AC,+/-,/,X"),
+                makeButton("7,8,8,-"),
+                makeButton("4,5,6,+"),
+                makeButton("1,2,3,="),
+                makeButton("0,.,%")
+              ],
             ),
           )
         ],
@@ -59,11 +60,14 @@ class _UserInterfaceState extends State<UserInterface> {
     );
   }
 
-  Widget makeButton(String row) {
+  Widget makeButton(dynamic row) {
     List<String> token = row.split(",");
     return Expanded(
-        child: Row(
-      children: token.map((e) => CalculatorButton(keyValue: e)).toList(),
-    ));
+      flex: 5,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: token.map((e) => CalculatorButton(keyValue: e)).toList(),
+      ),
+    );
   }
 }

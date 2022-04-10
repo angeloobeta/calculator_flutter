@@ -8,15 +8,21 @@ class CalculatorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: FlatButton(
-        shape: Border.all(
-            color: Colors.white, width: 2.0, style: BorderStyle.solid),
-        onPressed: () {},
-        child: Text(
-          keyValue,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 40,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: FlatButton(
+          // height: 90,
+          shape: Border.all(
+              // color: Colors.grey.withOpacity(0.5),
+              // width: 2.0,
+              style: BorderStyle.solid),
+          onPressed: () {},
+          child: Text(
+            keyValue,
+            style: const TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 40,
+            ),
           ),
         ),
       ),
