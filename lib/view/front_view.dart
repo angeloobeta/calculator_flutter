@@ -37,10 +37,12 @@ class _FrontViewState extends State<FrontView> {
             Expanded(
                 flex: 5,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    buttons("7,8,9,/"),
+                    buttons("4,5,6,x"),
                     buttons("1,2,3,+"),
-                    buttons("1,2,3,+"),
-                    buttons("1,2,3,+"),
+                    buttons("0,.,-"),
                   ],
                 ))
           ],
@@ -50,7 +52,20 @@ class _FrontViewState extends State<FrontView> {
   Widget buttons(String str) {
     List<String> token = str.split(",");
     return Row(
-      children: token.map((e) => Row()).toList(),
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: token
+          .map((_value) => Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: TextButton(
+                        child: Text(_value,
+                            style: const TextStyle(
+                                color: Colors.black45,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40)),
+                        onPressed: () {})),
+              ))
+          .toList(),
     );
   }
 }
