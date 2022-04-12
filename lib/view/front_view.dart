@@ -35,9 +35,13 @@ class _FrontViewState extends State<FrontView> {
                   )),
             ),
             Expanded(
-                flex: 6,
+                flex: 5,
                 child: Column(
-                  children: [buttons("1,2,3,+")],
+                  children: [
+                    buttons("1,2,3,+"),
+                    buttons("1,2,3,+"),
+                    buttons("1,2,3,+"),
+                  ],
                 ))
           ],
         ));
@@ -45,7 +49,8 @@ class _FrontViewState extends State<FrontView> {
 
   Widget buttons(String str) {
     List<String> token = str.split(",");
-    token.map((e) => Row());
-    return Expanded(child: Row(children: token));
+    return Row(
+      children: token.map((e) => Row()).toList(),
+    );
   }
 }
