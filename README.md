@@ -4,7 +4,7 @@ Calculator App using Flutter and Dart
 
 ## Getting Started
 
-This project is a simple calculator .
+### This project is a simple calculator .
  <img src="/assets/images/calculator_UI.png" height="500em"/>
 
 For help getting started with Flutter, view our
