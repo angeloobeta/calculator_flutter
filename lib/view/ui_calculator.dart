@@ -1,16 +1,18 @@
+import 'package:calculator_flutter/logic/state/state_managment.dart';
+import 'package:calculator_flutter/view/calculator_button.dart';
 import 'package:flutter/material.dart';
 
-class FrontView extends StatefulWidget {
-  const FrontView({Key? key}) : super(key: key);
+class UserInterface extends StatefulWidget {
+  const UserInterface({Key? key}) : super(key: key);
 
   @override
-  State<FrontView> createState() => _FrontViewState();
+  State<UserInterface> createState() => _UserInterfaceState();
 }
 
-class _FrontViewState extends State<FrontView> {
-  final String inputValue = "23 + 17";
+class _UserInterfaceState extends State<UserInterface> {
   @override
   Widget build(BuildContext context) {
+    final mainState = MainState.of(context);
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -26,11 +28,12 @@ class _FrontViewState extends State<FrontView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(inputValue,
+                          Text(mainState?.inputValue ?? '0',
                               style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
-                              ))
+                              )),
+                          const Icon(Icons.backspace_outlined)
                         ],
                       )),
                 ),
@@ -51,23 +54,6 @@ class _FrontViewState extends State<FrontView> {
 
   Widget buttons(String str) {
     List<String> token = str.split(",");
-    return Row(
-      children: token
-          .map(
-            (_value) => Expanded(
-              child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: TextButton(
-                      style: const ButtonStyle(),
-                      child: Text(_value,
-                          style: const TextStyle(
-                              color: Colors.black45,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40)),
-                      onPressed: () {})),
-            ),
-          )
-          .toList(),
-    );
+    return CalculatorButton(token: token);
   }
 }
