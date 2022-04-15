@@ -12,7 +12,7 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   String? inputValue;
   String? value;
-  String? operator;
+  String? operator = "Z";
   double? preValue;
 
   bool isNumber(String str) {
@@ -47,7 +47,7 @@ class _CalculatorState extends State<Calculator> {
         });
         break;
       case "=":
-        if (operator == null) {
+        if (operator != null) {
           setState(() {
             switch (operator) {
               case "/":
@@ -77,10 +77,8 @@ class _CalculatorState extends State<Calculator> {
       default:
         if (isNumber(keyValue!)) {
           if (operator != null) {
-            setState(() {
-              inputValue = inputValue! + keyValue;
-              value = value! + keyValue;
-            });
+            setState(() => inputValue = inputValue! + keyValue);
+            value = value! + keyValue;
           } else {
             setState(() => inputValue = "" + keyValue);
             operator = "Z";
