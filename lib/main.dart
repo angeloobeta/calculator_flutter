@@ -1,4 +1,5 @@
 import 'package:calculator_flutter/view/calculator.dart';
+import 'package:calculator_flutter/view/ui_calculator.dart';
 import 'package:flutter/material.dart';
 
 void main() {

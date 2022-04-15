@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MainState extends InheritedWidget {
-  final String? inputValue;
-  final double? preValue;
-  final String? value;
-  final String? operator;
-  final Function? onPressed;
-  const MainState(
+  MainState(
       {Key? key,
       required Widget child,
       this.inputValue,
@@ -15,6 +10,11 @@ class MainState extends InheritedWidget {
       this.operator,
       this.onPressed})
       : super(child: child);
+  final String? inputValue;
+  final double? preValue;
+  final String? value;
+  final String? operator;
+  final Function? onPressed;
 
   static MainState? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<MainState>();
