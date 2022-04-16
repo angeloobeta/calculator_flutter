@@ -37,7 +37,7 @@ class _UserInterfaceState extends State<UserInterface> {
                         children: [
                           Text(mainState?.inputValue ?? '0',
                               style: const TextStyle(
-                                fontSize: 40,
+                                fontSize: 50,
                                 fontWeight: FontWeight.bold,
                               )),
                           GestureDetector(
@@ -58,10 +58,10 @@ class _UserInterfaceState extends State<UserInterface> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      buttons("C,%,+/-, x"),
-                      buttons("7,8,9,/"),
-                      buttons("4,5,6,+"),
-                      buttons("1,2,3,-"),
+                      buttons("AC,+/-,%, /"),
+                      buttons("7,8,9,x"),
+                      buttons("4,5,6,-"),
+                      buttons("1,2,3,+"),
                       buttons("0,.,="),
                     ],
                   ))

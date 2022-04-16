@@ -24,7 +24,7 @@ class _CalculatorState extends State<Calculator> {
 
   void onPressed(String? keyValue) {
     switch (keyValue) {
-      case "C":
+      case "AC":
         operator = null;
         preValue = 0.0;
         value = "";
@@ -54,7 +54,7 @@ class _CalculatorState extends State<Calculator> {
                 inputValue =
                     (preValue! / double.parse(value!)).toStringAsFixed(2);
                 break;
-              case "X":
+              case "x":
                 inputValue =
                     (preValue! * double.parse(value!)).toStringAsFixed(0);
                 break;
@@ -80,8 +80,8 @@ class _CalculatorState extends State<Calculator> {
             setState(() => inputValue = inputValue! + keyValue);
             value = value! + keyValue;
           } else {
-            setState(() => inputValue = "" + keyValue);
             operator = "Z";
+            setState(() => inputValue = "" + keyValue);
           }
         } else {
           onPressed(keyValue);
