@@ -10,10 +10,10 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  String? inputValue;
-  String? value;
-  String? operator = "Z";
-  double? preValue;
+  late String inputValue = "";
+  late String value = "";
+  late String? operator = "Z";
+  late double preValue = 0.0;
 
   bool isNumber(String str) {
     if ({'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}.contains(str)) {
@@ -32,18 +32,17 @@ class _CalculatorState extends State<Calculator> {
         break;
       case ".":
       case "%":
-      case "<=":
       case "+/-":
         break;
       case "/":
       case "x":
       case "+":
       case "-":
-        operator = keyValue;
+        operator = keyValue!;
         value = "";
-        preValue = double.parse(inputValue!);
+        preValue = double.parse(inputValue);
         setState(() {
-          inputValue = inputValue! + keyValue!;
+          inputValue = inputValue + keyValue;
         });
         break;
       case "=":
@@ -52,24 +51,24 @@ class _CalculatorState extends State<Calculator> {
             switch (operator) {
               case "/":
                 inputValue =
-                    (preValue! / double.parse(value!)).toStringAsFixed(2);
+                    (preValue / double.parse(value)).toStringAsFixed(2);
                 break;
               case "x":
                 inputValue =
-                    (preValue! * double.parse(value!)).toStringAsFixed(0);
+                    (preValue * double.parse(value)).toStringAsFixed(0);
                 break;
               case "+":
                 inputValue =
-                    (preValue! + double.parse(value!)).toStringAsFixed(0);
+                    (preValue + double.parse(value)).toStringAsFixed(0);
                 break;
               case "-":
                 inputValue =
-                    (preValue! - double.parse(value!)).toStringAsFixed(0);
+                    (preValue - double.parse(value)).toStringAsFixed(0);
                 break;
             }
           });
           operator = null;
-          preValue = double.parse(inputValue!);
+          preValue = double.parse(inputValue);
           value = "";
           break;
         }
@@ -77,8 +76,11 @@ class _CalculatorState extends State<Calculator> {
       default:
         if (isNumber(keyValue!)) {
           if (operator != null) {
-            setState(() => inputValue = inputValue! + keyValue);
-            value = value! + keyValue;
+            setState(() {
+              inputValue = inputValue + keyValue;
+            });
+            print("Button was Pressed now");
+            value = value + keyValue;
           } else {
             operator = "Z";
             setState(() => inputValue = "" + keyValue);
