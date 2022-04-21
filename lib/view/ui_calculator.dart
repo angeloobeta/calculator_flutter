@@ -10,10 +10,10 @@ class UserInterface extends StatefulWidget {
 }
 
 class _UserInterfaceState extends State<UserInterface> {
-  String? inputValue;
-  String? value;
-  String? operator;
-  double? preValue;
+  // String inputValue ="";
+  // String value = "";
+  // String? operator;
+  // double? preValue;
 
   @override
   Widget build(BuildContext context) {
@@ -32,29 +32,38 @@ class _UserInterfaceState extends State<UserInterface> {
                     color: Colors.blueGrey,
                     child: Padding(
                       padding: EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(mainState?.inputValue ?? '0',
-                              style: const TextStyle(
-                                fontSize: 50,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          GestureDetector(
-                              child: const Icon(Icons.backspace_outlined),
-                              onTap: () {
-                                // setState(() {
-                                //   mainState?.inputValue = mainState.inputValue
-                                //       ?.substring(0,
-                                //           (mainState.inputValue?.length)! - 1);
-                                // });
-                              })
+                          Text(
+                            mainState!.operator,
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(mainState.inputValue ?? '0',
+                                  style: const TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              GestureDetector(
+                                  child: const Icon(Icons.backspace_outlined),
+                                  onTap: () {
+                                    // setState(() {
+                                    //   mainState?.inputValue = mainState.inputValue
+                                    //       ?.substring(0,
+                                    //           (mainState.inputValue?.length)! - 1);
+                                    // });
+                                  })
+                            ],
+                          )
                         ],
                       ),
                     )),
               ),
               Expanded(
-                  flex: 5,
+                  flex: 4,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

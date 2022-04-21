@@ -12,8 +12,10 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   late String inputValue = "";
   late String value = "";
-  late String? operator = "Z";
+  late String operator = "";
   late double preValue = 0.0;
+  late String prevOperator = "";
+  late bool activateOperator;
 
   bool isNumber(String str) {
     if ({'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}.contains(str)) {
@@ -25,9 +27,10 @@ class _CalculatorState extends State<Calculator> {
   void onPressed(String? keyValue) {
     switch (keyValue) {
       case "AC":
-        operator = null;
+        operator = "";
         preValue = 0.0;
         value = "";
+        activateOperator = false;
         setState(() => inputValue = "");
         break;
       case ".":
@@ -38,52 +41,86 @@ class _CalculatorState extends State<Calculator> {
       case "x":
       case "+":
       case "-":
-        operator = keyValue!;
-        value = "";
-        preValue = double.parse(inputValue);
-        setState(() {
-          inputValue = inputValue + keyValue;
-        });
-        break;
-      case "=":
-        if (operator != null) {
+        if (activateOperator != true) {
+          preValue = double.parse(value);
+          value = "";
+          inputValue = "";
+          prevOperator = keyValue!;
           setState(() {
-            switch (operator) {
+            operator = keyValue!;
+          });
+          activateOperator = true;
+          inputValue = "";
+          break;
+        } else {
+          setState(() {
+            switch (prevOperator) {
               case "/":
-                inputValue =
-                    (preValue / double.parse(value)).toStringAsFixed(2);
+                preValue = double.parse(
+                    (preValue / double.parse(value)).toStringAsFixed(2));
+                inputValue = preValue.toStringAsFixed(2);
                 break;
               case "x":
-                inputValue =
-                    (preValue * double.parse(value)).toStringAsFixed(0);
+                preValue = double.parse(
+                    (preValue * double.parse(value)).toStringAsFixed(0));
+                inputValue = preValue.toStringAsFixed(0);
                 break;
               case "+":
-                inputValue =
-                    (preValue + double.parse(value)).toStringAsFixed(0);
+                preValue = double.parse(
+                    (preValue + double.parse(value)).toStringAsFixed(0));
+                inputValue = preValue.toStringAsFixed(0);
                 break;
               case "-":
-                inputValue =
-                    (preValue - double.parse(value)).toStringAsFixed(0);
+                preValue = double.parse(
+                    (preValue - double.parse(value)).toStringAsFixed(0));
+                inputValue = preValue.toStringAsFixed(0);
                 break;
             }
           });
-          operator = null;
-          preValue = double.parse(inputValue);
-          value = "";
-          break;
+          prevOperator = operator;
         }
+        break;
+
+      case "=":
+        // if (operator != null) {
+        //   setState(() {
+        //     switch (operator) {
+        //       case "/":
+        //         inputValue =
+        //             (preValue / double.parse(value)).toStringAsFixed(2);
+        //         break;
+        //       case "x":
+        //         inputValue =
+        //             (preValue * double.parse(value)).toStringAsFixed(0);
+        //         break;
+        //       case "+":
+        //         inputValue =
+        //             (preValue + double.parse(value)).toStringAsFixed(0);
+        //         break;
+        //       case "-":
+        //         inputValue =
+        //             (preValue - double.parse(value)).toStringAsFixed(0);
+        //         break;
+        //     }
+        //   });
+        //   operator = "";
+        //   preValue = double.parse(inputValue);
+        //   value = "";
+        //   break;
+        // }
         break;
       default:
         if (isNumber(keyValue!)) {
-          if (operator != null) {
+          if ({'+', '-', '*', '/'}.contains(prevOperator)) {
             setState(() {
               inputValue = inputValue + keyValue;
             });
-            print("Button was Pressed now");
-            value = value + keyValue;
           } else {
-            operator = "Z";
-            setState(() => inputValue = "" + keyValue);
+            setState(() {
+              inputValue = inputValue + keyValue;
+            });
+            preValue = double.parse(inputValue);
+            value = value + inputValue;
           }
         } else {
           onPressed(keyValue);

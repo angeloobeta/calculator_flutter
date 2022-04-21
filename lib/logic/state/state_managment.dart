@@ -4,16 +4,16 @@ class MainState extends InheritedWidget {
   MainState(
       {Key? key,
       required Widget child,
-      this.inputValue,
-      this.preValue,
-      this.value,
-      this.operator,
-      this.onPressed})
+      required this.inputValue,
+      required this.preValue,
+      required this.value,
+      required this.operator,
+      required this.onPressed})
       : super(child: child);
   final String? inputValue;
   final double? preValue;
   final String? value;
-  final String? operator;
+  late String operator;
   final Function? onPressed;
 
   static MainState? of(BuildContext context) {
